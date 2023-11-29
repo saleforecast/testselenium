@@ -1,0 +1,18 @@
+services:
+  shiny-rselenium:
+    build: .
+    ports:
+      - "3838:3838"
+    environment:
+      - SELENIUM_HOST=selenium
+      - SELENIUM_PORT=4445
+    depends_on:
+      - selenium
+  selenium:
+    image: "selenium/standalone-chrome:4.2.2"
+    shm_size: 4g
+    ports:
+      - "4445:4444"
+    environment:
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+      - SE_NODE_MAX_SESSIONS=5
